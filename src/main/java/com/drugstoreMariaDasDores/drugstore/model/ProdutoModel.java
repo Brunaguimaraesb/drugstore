@@ -4,9 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_produto")
@@ -22,6 +25,10 @@ public class ProdutoModel {
 
 	@NotBlank	
 	private Double preco;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private CategoriaModel categoria;
 
 	public long getIdProduto() {
 		return idProduto;
@@ -45,6 +52,14 @@ public class ProdutoModel {
 
 	public void setPreco(Double preco) {
 		this.preco = preco;
+	}
+
+	public CategoriaModel getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(CategoriaModel categoria) {
+		this.categoria = categoria;
 	}
 
 }
